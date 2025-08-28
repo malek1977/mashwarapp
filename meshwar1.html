@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشوار - تطبيق النقل بالدراجات النارية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0078d7;
+            --secondary: #ff9f00;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .auth-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-btn {
+            background: none;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .login-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .signup-btn {
+            background-color: var(--primary);
+            border: 1px solid var(--primary);
+            color: white;
+        }
+        
+        .signup-btn:hover {
+            background-color: #0066b3;
+        }
+        
+        .language-toggle {
+            background: none;
+            border: 1px solid var(--gray);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 10px;
+        }
+        
+        /* قسم الهيرو */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+        
+        .cta-button:hover {
+            background-color: #e58f00;
+        }
+        
+        /* قسم الخدمات */
+        .services {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .service-card .price {
+            font-weight: bold;
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+        
+        /* كيفية العمل */
+        .how-it-works {
+            background-color: var(--light);
+            padding: 60px 20px;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+        
+        /* التطبيق */
+        .app-download {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), #005fa3);
+            color: white;
+        }
+        
+        .app-download h2 {
+            margin-bottom: 30px;
+        }
+        
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: var(--dark);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* لوحات التحكم */
+        .dashboard-section {
+            padding: 60px 20px;
+            background-color: var(--light);
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dashboard-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .dashboard-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .dashboard-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .dashboard-card .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .dashboard-card .btn:hover {
+            background-color: #0066b3;
+        }
+        
+        /* الدعم بالذكاء الاصطناعي */
+        .ai-support {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .ai-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .chat-container {
+            height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .ai-message {
+            background-color: #e3f2fd;
+            margin-right: auto;
+        }
+        
+        .user-message {
+            background-color: #0078d7;
+            color: white;
+            margin-left: auto;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .chat-input button {
+            padding: 12px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        /* الإعلانات */
+        .advertisements {
+            padding: 60px 20px;
+            background-color: var(--light);
+        }
+        
+        .ads-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .ad-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .ad-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .ad-content {
+            padding: 20px;
+        }
+        
+        .ad-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .ad-card p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* المميزات */
+        .features {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .company-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* وسائط متجاوبة */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+        }
+        
+        /* نمط لوحة التحكم */
+        .dashboard-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-dashboard {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--danger);
+        }
+        
+        .dashboard-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .menu-item {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .menu-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .dashboard-content {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="header-container">
+            <div class="logo">مش<span>وار</span></div>
+            <nav class="nav-links">
+                <a href="#services">الخدمات</a>
+                <a href="#how-it-works">كيفية العمل</a>
+                <a href="#app">حمل التطبيق</a>
+                <a href="#features">المميزات</a>
+                <a href="#ads">الإعلانات</a>
+                <a href="#ai-support">الدعم</a>
+            </nav>
+            <div>
+                <button class="language-toggle" id="languageToggle">
+                    <span>العربية</span>
+                    <span>🌐</span>
+                </button>
+                <div class="auth-buttons">
+                    <button class="auth-btn login-btn" onclick="openDashboard('client')">تسجيل الدخول</button>
+                    <button class="auth-btn signup-btn" onclick="openDashboard('signup')">إنشاء حساب</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم الهيرو -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>نقلك بأسرع وقت مع مشوار الدراجات النارية</h1>
+            <p>اطلب دراجة نارية واحصل على خدمة نقل سريعة وآمنة في جميع أنحاء اليمن والدول العربية</p>
+            <button class="cta-button" onclick="openDashboard('client')">اطلب الآن</button>
+            <button class="cta-button" style="background-color: var(--success);" onclick="openDashboard('driver')">انضم كسائق</button>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="services" id="services">
+        <h2 class="section-title">خدماتنا</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="مشوار دراجة نارية">
+                <div class="service-content">
+                    <h3>مشوار دراجة نارية</h3>
+                    <p>خدمة النقل الأساسية على الدراجات النارية للسفر داخل المدينة</p>
+                    <p class="price">يبدأ من 500 ريال يمني</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="مشوار توصيل">
+                <div class="service-content">
+                    <h3>مشوار توصيل</h3>
+                    <p>توصيل الطلبات والمستندات الصغيرة عبر الدراجات النارية</p>
+                    <p class="price">يبدأ من 700 ريال يمني</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="مشوار سريع">
+                <div class="service-content">
+                    <h3>مشوار سريع</h3>
+                    <p>خدمة التوصيل السريع للمستعجلين مع أولوية الطلب</p>
+                    <p class="price">يبدأ من 1000 ريال يمني</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- كيفية العمل -->
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">كيفية استخدام التطبيق</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>حمّل التطبيق</h3>
+                <p>قم بتحميل تطبيق مشوار من متجر التطبيقات</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>اختر وجهتك</h3>
+                <p>ادخل موقع pickup والوجهة التي تريد الذهاب إليها</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>اطلب الدراجة</h3>
+                <p>اضغط على زر الطلب وسيصل rider إلى موقعك خلال دقائق</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>استمتع بالرحلة</h3>
+                <p>استمتع برحلة آمنة وسريعة وادفع نقداً أو عن طريق التطبيق</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- لوحات التحكم -->
+    <section class="dashboard-section" id="dashboards">
+        <h2 class="section-title">لوحات التحكم</h2>
+        <div class="dashboard-cards">
+            <div class="dashboard-card">
+                <i class="fas fa-user-cog"></i>
+                <h3>لوحة تحكم المدير</h3>
+                <p>إدارة كاملة للتطبيق والمستخدمين والخدمات والإعلانات</p>
+                <a href="#" class="btn" onclick="openDashboard('admin'); return false;">الدخول</a>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-motorcycle"></i>
+                <h3>لوحة تحكم السائق</h3>
+                <p>إدارة الطلبات وتتبع الرحلات وتحصيل الأرباح</p>
+                <a href="#" class="btn" onclick="openDashboard('driver'); return false;">الدخول</a>
+            </div>
+            <div class="dashboard-card">
+                <i class="fas fa-user"></i>
+                <h3>لوحة تحكم العميل</h3>
+                <p>طلب الخدمات وتتبع الرحلات وإدارة الدفع</p>
+                <a href="#" class="btn" onclick="openDashboard('client'); return false;">الدخول</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- الدعم بالذكاء الاصطناعي -->
+    <section class="ai-support" id="ai-support">
+        <h2 class="section-title">دعم بالذكاء الاصطناعي</h2>
+        <div class="ai-container">
+            <div class="chat-container" id="chatContainer">
+                <div class="message ai-message">
+                    مرحباً! أنا مساعدك الافتراضي في تطبيق مشوار. كيف يمكنني مساعدتك اليوم؟
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا...">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- الإعلانات -->
+    <section class="advertisements" id="ads">
+        <h2 class="section-title">الإعلانات</h2>
+        <div class="ads-container">
+            <div class="ads-grid">
+                <div class="ad-card">
+                    <img src="https://images.unsplash.com/photo-1665686374006-b8f04cf62d57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="إعلان 1">
+                    <div class="ad-content">
+                        <h3>عروض خاصة للعملاء الجدد</h3>
+                        <p>احصل على خصم 20% على أول رحلة مع مشوار</p>
+                    </div>
+                </div>
+                <div class="ad-card">
+                    <img src="https://images.unsplash.com/photo-1665686377065-42f6d2a193d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="إعلان 2">
+                    <div class="ad-content">
+                        <h3>انضم كسائق مع مشوار</h3>
+                        <p>احصل على دخل إضافي وكن جزءاً من فريقنا</p>
+                    </div>
+                </div>
+                <div class="ad-card">
+                    <img src="https://images.unsplash.com/photo-1665686374006-b8f04cf62d57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="إعلان 3">
+                    <div class="ad-content">
+                        <h3>عروض الشركات</h3>
+                        <p>خصومات خاصة للشركات والموظفين</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المميزات -->
+    <section class="features" id="features">
+        <h2 class="section-title">مميزات تطبيق مشوار</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>سرعة الوصول</h3>
+                <p>وصول السائق في غضون دقائق قليلة لأي مكان داخل المدينة</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>رحلات آمنة</h3>
+                <p>جميع سائقينا معتمدون ومدربون على أعلى مستوى من السلامة</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>أسعار تنافسية</h3>
+                <p>أسعارنا مناسبة للجميع مع خيارات دفع متعددة</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>تتبع مباشر</h3>
+                <p>امكانية تتبع موقع السائق بشكل مباشر من خلال التطبيق</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>دعم فني 24/7</h3>
+                <p>فريق الدعم الفني متاح على مدار الساعة لمساعدتك</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-gift"></i>
+                <h3>عروض مستمرة</h3>
+                <p>خصومات وعروض مستمرة للعملاء الدائمين والجدد</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التطبيق -->
+    <section class="app-download" id="app">
+        <h2>حمل تطبيق مشوار الآن</h2>
+        <div class="download-buttons">
+            <a href="#" class="download-btn">
+                <i class="fab fa-google-play"></i>
+                <span>Google Play</span>
+            </a>
+            <a href="#" class="download-btn">
+                <i class="fab fa-apple"></i>
+                <span>App Store</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>مشوار</h3>
+                <p>تطبيق النقل الأول بالدراجات النارية في اليمن والوطن العربي</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#how-it-works">كيفية العمل</a></li>
+                    <li><a href="#app">حمل التطبيق</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#ai-support">الدعم</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>الدول المتاحة</h3>
+                <ul>
+                    <li><a href="#">اليمن</a></li>
+                    <li><a href="#">السعودية</a></li>
+                    <li><a href="#">الإمارات</a></li>
+                    <li><a href="#">مصر</a></li>
+                    <li><a href="#">المزيد قريباً</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>اتصل بنا</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 00967779846405</li>
+                    <li><i class="fas fa-phone"></i> 00967711916443</li>
+                    <li><i class="fas fa-envelope"></i> info@mashwar.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> صنعاء، اليمن</li>
+                </ul>
+            </div>
+        </div>
+        <div class="company-info">
+            <p>جميع الحقوق محفوظة لشركة عين الكترونية التقنية © 2023</p>
+        </div>
+        <div class="copyright">
+            <p>Mashwar App - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- لوحة تحكم المدير -->
+    <div id="adminDashboard" class="dashboard-panel">
+        <div class="dashboard-header">
+            <h2>لوحة تحكم المدير</h2>
+            <button class="close-dashboard" onclick="closeDashboard('admin')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="dashboard-menu">
+            <div class="menu-item">
+                <i class="fas fa-users"></i>
+                <p>إدارة المستخدمين</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-motorcycle"></i>
+                <p>إدارة السائقين</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-list"></i>
+                <p>إدارة الخدمات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-ad"></i>
+                <p>إدارة الإعلانات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <p>الإعدادات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-database"></i>
+                <p>النسخ الاحتياطي</p>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <h3>نظرة عامة على النظام</h3>
+            <p>هنا يمكنك إدارة جميع جوانب تطبيق مشوار من خلال لوحة التحكم الشاملة.</p>
+        </div>
+    </div>
+
+    <!-- لوحة تحكم السائق -->
+    <div id="driverDashboard" class="dashboard-panel">
+        <div class="dashboard-header">
+            <h2>لوحة تحكم السائق</h2>
+            <button class="close-dashboard" onclick="closeDashboard('driver')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="dashboard-menu">
+            <div class="menu-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>الطلبات الجديدة</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-route"></i>
+                <p>الرحلات النشطة</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-history"></i>
+                <p>سجل الرحلات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <p>الأرباح</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-star"></i>
+                <p>التقييمات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <p>الإعدادات</p>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <h3>نظرة عامة على الحساب</h3>
+            <p>هنا يمكنك إدارة رحلاتك وأرباحك وتقييماتك كسائق في تطبيق مشوار.</p>
+        </div>
+    </div>
+
+    <!-- لوحة تحكم العميل -->
+    <div id="clientDashboard" class="dashboard-panel">
+        <div class="dashboard-header">
+            <h2>لوحة تحكم العميل</h2>
+            <button class="close-dashboard" onclick="closeDashboard('client')"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="dashboard-menu">
+            <div class="menu-item">
+                <i class="fas fa-motorcycle"></i>
+                <p>طلب خدمة</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>تتبع الرحلة</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-history"></i>
+                <p>سجل الرحلات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-credit-card"></i>
+                <p>طرق الدفع</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-star"></i>
+                <p>التقييمات</p>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <p>الإعدادات</p>
+            </div>
+        </div>
+        <div class="dashboard-content">
+            <h3>نظرة عامة على الحساب</h3>
+            <p>هنا يمكنك طلب الخدمات وتتبع رحلاتك وإدارة حسابك في تطبيق مشوار.</p>
+        </div>
+    </div>
+
+    <script>
+        // تبديل اللغة
+        document.getElementById('languageToggle').addEventListener('click', function() {
+            const currentLang = document.documentElement.lang;
+            if (currentLang === 'ar') {
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                this.querySelector('span').textContent = 'English';
+                // هنا سيتم تغيير جميع النصوص إلى الإنجليزية في تطبيق حقيقي
+                alert('Language switched to English');
+            } else {
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                this.querySelector('span').textContent = 'العربية';
+                // هنا سيتم تغيير جميع النصوص إلى العربية في تطبيق حقيقي
+                alert('تم التبديل إلى اللغة العربية');
+            }
+        });
+        
+        // فتح وإغلاق لوحات التحكم
+        function openDashboard(type) {
+            document.getElementById(type + 'Dashboard').style.display = 'block';
+        }
+        
+        function closeDashboard(type) {
+            document.getElementById(type + 'Dashboard').style.display = 'none';
+        }
+        
+        // محاكاة الدردشة بالذكاء الاصطناعي
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // إضافة رسالة المستخدم
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('message', 'user-message');
+            userMessage.textContent = message;
+            chatContainer.appendChild(userMessage);
+            
+            // مسح حقل الإدخال
+            input.value = '';
+            
+            // محاكاة رد الذكاء الاصطناعي
+            setTimeout(() => {
+                const aiMessage = document.createElement('div');
+                aiMessage.classList.add('message', 'ai-message');
+                
+                // ردود ذكية بناءً على محتوى الرسالة
+                if (message.includes('سعر') || message.includes('تكلفة') || message.includes('ثمن')) {
+                    aiMessage.textContent = 'أسعار خدماتنا تبدأ من 500 ريال يمني للرحلات داخل المدينة. هل تريد معرفة السعر لوجهة محددة؟';
+                } else if (message.includes('تسجيل') || message.includes('حساب') || message.includes('اشتراك')) {
+                    aiMessage.textContent = 'لإنشاء حساب جديد، اضغط على زر "إنشاء حساب" في أعلى الصفحة واملأ المعلومات المطلوبة.';
+                } else if (message.includes('دفع') || message.includes('payment') || message.includes('pay')) {
+                    aiMessage.textContent = 'نحن نقدم خيارات دفع متعددة: نقداً، وبطاقات الائتمان، والمحافظ الإلكترونية.';
+                } else if (message.includes('سائق') || message.includes('انضم') || message.includes('driver')) {
+                    aiMessage.textContent = 'للانضمام كسائق، يرجى تعبئة نموذج التسجيل كسائق وسنتصل بك خلال 24 ساعة.';
+                } else {
+                    aiMessage.textContent = 'شكراً لرسالتك. كيف يمكنني مساعدتك بشكل أفضل؟ هل لديك استفسار عن خدماتنا، الأسعار، أو شيء آخر؟';
+                }
+                
+                chatContainer.appendChild(aiMessage);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+            
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // دعم الإدخال بواسطة زر Enter
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
