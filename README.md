@@ -1,2 +1,0 @@
-# mashwarapp
-mashwar app
