@@ -299,63 +299,6 @@
             transform: translateY(-3px);
         }
         
-        /* لوحات التحكم */
-        .dashboard-section {
-            padding: 60px 20px;
-            background-color: var(--light);
-        }
-        
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .dashboard-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .dashboard-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .dashboard-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .dashboard-card p {
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-        
-        .dashboard-card .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .dashboard-card .btn:hover {
-            background-color: #0066b3;
-        }
-        
         /* الدعم بالذكاء الاصطناعي */
         .ai-support {
             padding: 60px 20px;
@@ -596,69 +539,6 @@
                 display: none;
             }
         }
-        
-        /* نمط لوحة التحكم */
-        .dashboard-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .close-dashboard {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--danger);
-        }
-        
-        .dashboard-menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .menu-item {
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .menu-item:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .menu-item i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        .dashboard-content {
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
@@ -680,8 +560,8 @@
                     <span>🌐</span>
                 </button>
                 <div class="auth-buttons">
-                    <button class="auth-btn login-btn" onclick="openDashboard('client')">تسجيل الدخول</button>
-                    <button class="auth-btn signup-btn" onclick="openDashboard('signup')">إنشاء حساب</button>
+                    <button class="auth-btn login-btn">تسجيل الدخول</button>
+                    <button class="auth-btn signup-btn">إنشاء حساب</button>
                 </div>
             </div>
         </div>
@@ -692,8 +572,8 @@
         <div class="hero-content">
             <h1>نقلك بأسرع وقت مع مشوار الدراجات النارية</h1>
             <p>اطلب دراجة نارية واحصل على خدمة نقل سريعة وآمنة في جميع أنحاء اليمن والدول العربية</p>
-            <button class="cta-button" onclick="openDashboard('client')">اطلب الآن</button>
-            <button class="cta-button" style="background-color: var(--success);" onclick="openDashboard('driver')">انضم كسائق</button>
+            <button class="cta-button">اطلب الآن</button>
+            <button class="cta-button" style="background-color: var(--success);">انضم كسائق</button>
         </div>
     </section>
 
@@ -721,9 +601,11 @@
                 <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="مشوار سريع">
                 <div class="service-content">
                     <h3>مشوار سريع</h3>
-                    <p>خدمة التوصيل السريع للمستعجلين مع أولوية الطلب</p>
-                    <p class="price">يبدأ من 1000 ريال يمني</p>
-                </div>
+                    <p>خدمة التوصيل السريع للم
+                                    <div class="service-content">
+                <h3>مشوار سريع</h3>
+                <p>خدمة التوصيل السريع للمستعجلين مع أولوية الطلب</p>
+                <p class="price">يبدأ من 1000 ريال يمني</p>
             </div>
         </div>
     </section>
@@ -751,31 +633,6 @@
                 <div class="step-number">4</div>
                 <h3>استمتع بالرحلة</h3>
                 <p>استمتع برحلة آمنة وسريعة وادفع نقداً أو عن طريق التطبيق</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- لوحات التحكم -->
-    <section class="dashboard-section" id="dashboards">
-        <h2 class="section-title">لوحات التحكم</h2>
-        <div class="dashboard-cards">
-            <div class="dashboard-card">
-                <i class="fas fa-user-cog"></i>
-                <h3>لوحة تحكم المدير</h3>
-                <p>إدارة كاملة للتطبيق والمستخدمين والخدمات والإعلانات</p>
-                <a href="#" class="btn" onclick="openDashboard('admin'); return false;">الدخول</a>
-            </div>
-            <div class="dashboard-card">
-                <i class="fas fa-motorcycle"></i>
-                <h3>لوحة تحكم السائق</h3>
-                <p>إدارة الطلبات وتتبع الرحلات وتحصيل الأرباح</p>
-                <a href="#" class="btn" onclick="openDashboard('driver'); return false;">الدخول</a>
-            </div>
-            <div class="dashboard-card">
-                <i class="fas fa-user"></i>
-                <h3>لوحة تحكم العميل</h3>
-                <p>طلب الخدمات وتتبع الرحلات وإدارة الدفع</p>
-                <a href="#" class="btn" onclick="openDashboard('client'); return false;">الدخول</a>
             </div>
         </div>
     </section>
@@ -819,7 +676,7 @@
                     <img src="https://images.unsplash.com/photo-1665686374006-b8f04cf62d57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="إعلان 3">
                     <div class="ad-content">
                         <h3>عروض الشركات</h3>
-                        <p>خصومات خاصة للشركات والموظفين</p>
+                        <p>خصومات خاصة لل الشركات والموظفين</p>
                     </div>
                 </div>
             </div>
@@ -929,120 +786,6 @@
         </div>
     </footer>
 
-    <!-- لوحة تحكم المدير -->
-    <div id="adminDashboard" class="dashboard-panel">
-        <div class="dashboard-header">
-            <h2>لوحة تحكم المدير</h2>
-            <button class="close-dashboard" onclick="closeDashboard('admin')"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="dashboard-menu">
-            <div class="menu-item">
-                <i class="fas fa-users"></i>
-                <p>إدارة المستخدمين</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-motorcycle"></i>
-                <p>إدارة السائقين</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-list"></i>
-                <p>إدارة الخدمات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-ad"></i>
-                <p>إدارة الإعلانات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-cog"></i>
-                <p>الإعدادات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-database"></i>
-                <p>النسخ الاحتياطي</p>
-            </div>
-        </div>
-        <div class="dashboard-content">
-            <h3>نظرة عامة على النظام</h3>
-            <p>هنا يمكنك إدارة جميع جوانب تطبيق مشوار من خلال لوحة التحكم الشاملة.</p>
-        </div>
-    </div>
-
-    <!-- لوحة تحكم السائق -->
-    <div id="driverDashboard" class="dashboard-panel">
-        <div class="dashboard-header">
-            <h2>لوحة تحكم السائق</h2>
-            <button class="close-dashboard" onclick="closeDashboard('driver')"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="dashboard-menu">
-            <div class="menu-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>الطلبات الجديدة</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-route"></i>
-                <p>الرحلات النشطة</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-history"></i>
-                <p>سجل الرحلات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-money-bill-wave"></i>
-                <p>الأرباح</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-star"></i>
-                <p>التقييمات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-cog"></i>
-                <p>الإعدادات</p>
-            </div>
-        </div>
-        <div class="dashboard-content">
-            <h3>نظرة عامة على الحساب</h3>
-            <p>هنا يمكنك إدارة رحلاتك وأرباحك وتقييماتك كسائق في تطبيق مشوار.</p>
-        </div>
-    </div>
-
-    <!-- لوحة تحكم العميل -->
-    <div id="clientDashboard" class="dashboard-panel">
-        <div class="dashboard-header">
-            <h2>لوحة تحكم العميل</h2>
-            <button class="close-dashboard" onclick="closeDashboard('client')"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="dashboard-menu">
-            <div class="menu-item">
-                <i class="fas fa-motorcycle"></i>
-                <p>طلب خدمة</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>تتبع الرحلة</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-history"></i>
-                <p>سجل الرحلات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-credit-card"></i>
-                <p>طرق الدفع</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-star"></i>
-                <p>التقييمات</p>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-cog"></i>
-                <p>الإعدادات</p>
-            </div>
-        </div>
-        <div class="dashboard-content">
-            <h3>نظرة عامة على الحساب</h3>
-            <p>هنا يمكنك طلب الخدمات وتتبع رحلاتك وإدارة حسابك في تطبيق مشوار.</p>
-        </div>
-    </div>
-
     <script>
         // تبديل اللغة
         document.getElementById('languageToggle').addEventListener('click', function() {
@@ -1061,15 +804,6 @@
                 alert('تم التبديل إلى اللغة العربية');
             }
         });
-        
-        // فتح وإغلاق لوحات التحكم
-        function openDashboard(type) {
-            document.getElementById(type + 'Dashboard').style.display = 'block';
-        }
-        
-        function closeDashboard(type) {
-            document.getElementById(type + 'Dashboard').style.display = 'none';
-        }
         
         // محاكاة الدردشة بالذكاء الاصطناعي
         function sendMessage() {
